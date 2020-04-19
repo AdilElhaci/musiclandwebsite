@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                <h:form id="cevridiller-form">
+                        <div class="form-group">
+                            <label for="selectdil">Sarki Text</label>
+                            <h:inputTextarea id="inputtext" value="#{ceviriDillerControllers.ceviriDiller.sarki_Text}" required="true" requiredMessage="bos birakilmaz...." styleClass="form-control"/>
+                                <h:message for="inputtext"/>
+                        </div>
+                        
+
+                        <div class="form-group">
+                            <label for="selectsarki">Select Song</label>
+                            <h:selectOneMenu styleClass="custom-select" id="selectsarki" value="#{ceviriDillerControllers.ceviriDiller.sarki}" converter="sarkiConverter">
+                                <f:selectItems value="#{ceviriDillerControllers.sarkicontrollers.allSong()}" var="sarki" itemValue="#{sarki}" itemLabel="#{sarki.tmp_name}" >
+                                </f:selectItems>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="form-group">
+                            <label for="selectdil">Select Language</label>
+                            <h:selectOneMenu styleClass="custom-select" id="selectdil" value="#{ceviriDillerControllers.ceviriDiller.dil}" converter="dilConverter">
+                                <f:selectItems value="#{ceviriDillerControllers.dilcontrollers.allDil()}" var="dil" itemValue="#{dil}" itemLabel="#{dil.dil_name}" >
+                                </f:selectItems>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="form-group">
+                            <h:inputHidden value="#{ceviriDillerControllers.ceviriDiller.id}"/>
+                            <h:commandButton rendered="#{ceviriDillerControllers.ceviriDiller.id==null}" action="#{ceviriDillerControllers.create()}" value="Create" styleClass="btn btn-primary">
+                                <f:ajax execute="cevridiller-form" render="cevridiller-form ceviridiller-table"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{ceviriDillerControllers.ceviriDiller.id!=null}" action="#{ceviriDillerControllers.clearForm()}" value="clear Form" styleClass="btn btn-light">
+                                <f:ajax execute="cevridiller-form" render="cevridiller-form"/>
+                            </h:commandButton>
+                            <h:commandButton rendered="#{ceviriDillerControllers.ceviriDiller.id!=null}" action="#{ceviriDillerControllers.update()}" value="Update" style="margin-left: 10px" styleClass="btn btn-primary">
+                                <f:ajax execute="cevridiller-form" render="cevridiller-form ceviridiller-table"/>
+                            </h:commandButton>
+                        </div>
+                    <div style="padding-bottom: 500px"></div>
+                    </h:form>
+                
+    
+</ui:composition>
+
+
+

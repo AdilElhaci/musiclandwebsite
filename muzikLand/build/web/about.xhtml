@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <meta charset="UTF-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1"></meta>
+        <title>About Us| Music Land</title>
+        <!-- Loading third party fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet" type="text/css"></link>
+        <link href="/MuzikLand/resources/fonts/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
+        <!-- Loading main css file -->
+        <link rel="stylesheet" href="/MuzikLand/resources/style.css"></link>
+    </head>
+    <body>
+        <div id="site-content">
+            <header class="site-header">
+                <div class="container">
+                    <a href="/MuzikLand/index.xhtml" id="branding">
+                        <img src="/MuzikLand/resources/images/logo.png" alt="Site Title" width="150px" height="50px"></img>
+                        <small class="site-description">Music is lifestyle</small>
+                    </a> <!-- #branding -->
+                    <h:form>
+                    <nav class="main-navigation">
+                        <button type="button" class="toggle-menu"><i class="fa fa-bars"></i></button>
+                        <ul class="menu">
+                            <li class="menu-item"><a href="/MuzikLand/index.xhtml">Home</a></li>							
+                            <li class="menu-item"> <h:commandLink value="Login/Sign" action="/login.xhtml?faces-redirect=true" rendered="#{sessionScope.valid_admin.kullanici_id== null and sessionScope.valid_user.kullanici_id== null}"/> </li>
+                            <li class="menu-item"> <h:commandLink value="Logout" action="/login.xhtml?faces-redirect=true" rendered="#{sessionScope.valid_admin.kullanici_id!= null or sessionScope.valid_user.kullanici_id!= null}"/> </li>
+                            <li class="menu-item current-menu-item"><a href="/MuzikLand/about.xhtml">About</a></li>
+                            <li class="menu-item ">
+                                    <div>
+                                        <h:outputLabel value="#{uyelikYapanlarControllers.tmpUser}" rendered="#{sessionScope.valid_admin.kullanici_id!= null or sessionScope.valid_user.kullanici_id!= null}" style="color: white;margin-right: 10px;font-style: italic;font-size: 25px"/>
+                                        <h:graphicImage value="/file/#{uyelikYapanlarControllers.updateToKullanici.yetki.resim.fileName}" rendered="#{sessionScope.valid_admin.kullanici_id!= null or sessionScope.valid_user.kullanici_id!= null}" width="70px" height="55px" style="border-radius: 30px" title="#{uyelikYapanlarControllers.tmpUser}">                                                                
+                                        </h:graphicImage>    
+                                    </div>
+                                </li>   
+                        </ul> <!-- .menu -->
+                    </nav> <!-- .main-navigation -->
+                    </h:form>
+                    <div class="mobile-menu"></div>
+                </div>
+            </header> <!-- .site-header -->
+            <main class="main-content">
+                <div class="fullwidth-block inner-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="content">
+                                    <h2 class="entry-title">Our History</h2>
+                                    <figure class="featured-image">
+                                    </figure>
+                                    <p class="leading">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat odio autem iste neque architecto alias culpa, ab libero, praesentium esse natus quae possimus sed qui dolorum laudantium illum, incidunt eligendi?</p>
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.</p>
+                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- .testimonial-section -->
+            </main> <!-- .main-content -->
+        </div> <!-- #site-content -->
+        <script src="/MuzikLand/resources/js/jquery-1.11.1.min.js"></script>		
+        <script src="/MuzikLand/resources/js/plugins.js"></script>
+        <script src="/MuzikLand/resources/js/app.js"></script>
+    </body>
+</html>

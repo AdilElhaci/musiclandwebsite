@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form id="kullanici-kform">   
+        <div style="padding-top: 20px;padding-bottom: 30px"></div>
+        <h:outputLabel value="Sarki Name : " style="font-size: 20px;color: blue"/>
+        <h:outputText value="#{extraControllers.sarkiOzeti().sarki.tmp_name}" style="color: white"/><br/>
+        <h:outputLabel value="Sarki Description : " style="font-size: 20px;color: blue"/>
+        <h:outputText value="#{extraControllers.sarkiOzeti().sarki.description}" style="color: white"/><br/>
+        <h:outputLabel value="Sarki Sure : " style="font-size: 20px;color: blue"/>
+        <h:outputText value="#{extraControllers.sarkiOzeti().sarki_sure}" style="color: white"/><br/>
+        <h:outputLabel value="Sarki Puan : " style="font-size: 20px;color: blue"/>
+        <h:outputText value="#{extraControllers.sarkiOzeti().sarki_puan}" style="color: white"/>     <br/>          
+        <h:outputLabel value="Sarki Dili : " style="font-size: 20px;color: blue"/>
+        <h:outputText value="#{extraControllers.sarkiOzeti().sarki.sarkiDili.dil_name}" style="color: white"/><br/>
+        <h:outputLabel value="Sarki Albumu : " style="font-size: 20px;color: blue"/>
+        <h:outputText value="#{extraControllers.sarkiOzeti().sarki.album.name}" style="color: white"/><br/>
+        <h:outputLabel value="Sarki Yili  : " style="font-size: 20px;color: blue"/>
+        <h:outputText value="#{extraControllers.sarkiOzeti().sarki.yil}" style="color: white"/><br/>
+        <h:outputLabel value="Sarki Ulke : " style="font-size: 20px;color: blue"/>
+        <h:outputText value="#{extraControllers.sarkiOzeti().ulke.ulke }" style="color: white"/><br/>
+        <h:outputLabel value="Sarkici Sirketi : " style="font-size: 20px;color: blue"/>
+        <h:outputText value="#{extraControllers.sarkiOzeti().sarkici_sirketi}" style="color: white"/><br/>
+        <h:outputLabel value="LastUpdate : " style="font-size: 20px;color: blue"/>
+        <h:outputText value="#{extraControllers.sarkiOzeti().sarki.last_update}" style="color: white"/> 
+        <br/>
+         <h:outputLabel value="sarkici : " style="font-size: 20px;color: blue"/>         
+         <ul>             
+        <ui:repeat value="#{extraControllers.sarkiOzeti().sarki.sarkiSarkici}" var="sar">          
+            <h:outputText value="#{sar.name} #{sar.last_name}" style="color: white"/>             
+        </ui:repeat>
+         </ul>       
+        <h:outputLabel value="Sarki Category : " style="font-size: 20px;color: blue"/>
+        <ul>
+        <ui:repeat value="#{extraControllers.sarkiOzeti().sarki.sarkiCategory}" var="cat">          
+            <h:outputText value=" --> #{cat.name}" style="color: white"/>           
+        </ui:repeat>
+        </ul>
+        <br/>
+        <div style="padding-bottom: 400px"></div>
+    </h:form>
+</ui:composition>

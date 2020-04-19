@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form id="sarki-form" style="margin-left: -40px">                                                                                      
+        <h:panelGrid columns="2" bgcolor="#cce5ff" class=" col-md-auto" rendered="#{sarkiDocmentControllers.docment.doc_id!=null}">                                                                                   
+            <h:panelGrid columns="2">
+                <h:commandButton id="ekle" style="color: mediumblue " value="Update" action="#{sarkiDocmentControllers.update()}" onkeyup="#{sarkiDocmentControllers.setSonuc(-1)}" styleClass="btn-lg btn-group-toggle btn-light btn-outline-success"/>                                                                                                                                                                      
+                <h:commandButton onclick="$('.modal').modal('show')" value="delete" action="sarkilar" styleClass="btn btn-danger" >
+                    <f:ajax execute="@this" render="delete-modal"/>
+                </h:commandButton>                           
+                <h:commandButton value="clearForm" action="#{sarkiDocmentControllers.back()}" styleClass="btn btn-primary btn-outline-success"/>                                                                                                                         
+            </h:panelGrid>
+            <f:facet name="header">
+                <h:outputLabel  rendered="#{sarkiDocmentControllers.docment.sarki.sarki_id!=null}">
+                    <b> Update yada delete Yapacağiniz Sarki Id : </b>
+                    <h:outputText value="#{sarkiDocmentControllers.docment.sarki.sarki_id}" rendered="#{sarkiDocmentControllers.docment.sarki.sarki_id!=null}"/>
+                    <br/>
+                </h:outputLabel>
+                <h:message for="name"/><br/>
+                <h:message for="Description"/><br/>
+                <h:message for="yil"/><br/>                            
+            </f:facet>                     
+            <div class="form-group">   
+                <h:outputLabel value="***************"/>
+                <h:outputLabel value="Sarki Name : #{sarkiDocmentControllers.docment.fileName}" style="padding-left: 40px"/>
+                <Label for="name"> Sarki Name                                    
+                </Label>
+                <h:inputText id="name" value="#{sarkiDocmentControllers.docment.sarki.tmp_name}" styleClass="form-control" />
+                <Label for="Description"> Sarki Description </Label>
+                <h:inputTextarea id="Description" value="#{sarkiDocmentControllers.docment.sarki.description}" styleClass="form-control" required="true" requiredMessage="*** 2- en az 5 tane harf içereck bir cumle***">
+                    <f:validateLength minimum="5"/>
+                </h:inputTextarea>
+                <Label for="yil"> Sarki Yil </Label>
+                <h:inputText id="yil" value="#{sarkiDocmentControllers.docment.sarki.yil}" styleClass="form-control" requiredMessage="*** 3-yanlis tarih\n">
+                    <f:validateLongRange minimum="1900" maximum="2020"/>
+                </h:inputText>  
+                <Label for="Sarkici">Sarkici </Label>
+                <h:selectManyListbox  styleClass="custom-select" id="sarkici" value="#{sarkiDocmentControllers.docment.sarki.sarkiSarkici}" converter="sarkiciConverter" size="4">
+                    <f:selectItems value="#{sarkiDocmentControllers.sarkicontrol.sarkiciKontrol.allSarkici()}" var="sarkici" itemValue="#{sarkici}" itemLabel="#{sarkici.name}  #{sarkici.last_name}"/>                                
+                </h:selectManyListbox>
+                <Label for="category"> Category </Label>
+                <h:selectManyListbox  styleClass="custom-select" id="category" value="#{sarkiDocmentControllers.docment.sarki.sarkiCategory}" converter="categoryConverter" size="4">
+                    <f:selectItems value="#{sarkiDocmentControllers.sarkicontrol.categoryControl.allClist()}" var="category" itemValue="#{category}" itemLabel="#{category.name}"/>                                
+                </h:selectManyListbox>
+                <Label for="secilen-dil"> Dil </Label>
+                <h:selectOneMenu  styleClass="custom-select" id="secilen-dil" value="#{sarkiDocmentControllers.docment.sarki.sarkiDili}" converter="dilConverter" >                                        
+                    <f:selectItems value="#{sarkiDocmentControllers.sarkicontrol.dilControl.allDil()}" var="dil" itemValue="#{dil}" itemLabel="#{dil.dil_name}"/>                                
+                </h:selectOneMenu>                              
+                <Label for="secilen-album"> Album </Label>
+                <h:selectOneMenu styleClass="custom-select" id="secilen-album" value="#{sarkiDocmentControllers.docment.sarki.album}" converter="albumConverter">
+                    <f:selectItems value="#{sarkiDocmentControllers.sarkicontrol.albumControl.allAlbumList()}" var="album" itemValue="#{album}" itemLabel="#{album.name}"/>                                
+                </h:selectOneMenu>
+            </div>
+            <h:outputLabel value=""/><h:outputLabel value=""/><h:outputLabel value=""/><h:outputLabel value=""/>
+        </h:panelGrid>
+        <div style="padding-bottom: 400px"></div>
+    </h:form>  
+
+</ui:composition>
+
+
+

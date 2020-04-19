@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1"></meta>
+
+        <title>About Us| Music Land</title>
+        <link href="/MuzikLand/resources/css/bootstrap.css" rel="stylesheet"></link>
+        <!-- Loading third party fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet" type="text/css"></link>
+        <link href="/MuzikLand/resources/fonts/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
+        <!-- Loading main css file -->
+        <link rel="stylesheet" href="/MuzikLand/resources/style.css"></link>
+        
+        <script src="/MuzikLand/resources/js/jquery-1.11.1.min.js"></script>		
+        <script src="/MuzikLand/resources/js/plugins.js"></script>
+        <script src="/MuzikLand/resources/js/app.js"></script>
+        <script src="/MuzikLand/resources/js/jquery-3.3.1.min.js"></script>
+        <script src="/MuzikLand/resources/js/bootstrap.js"></script>
+        
+
+    </h:head>
+
+
+        <div id="site-content">
+            <header class="site-header">
+                <div class="container">
+                    <a href="/MuzikLand/index.xhtml" id="branding">
+                        <img src="/MuzikLand/resources/images/logo.png" alt="Site Title" width="150px" height="50px"></img>
+                        <small class="site-description">Music is lifestyle</small>
+                    </a> <!-- #branding -->
+                    <h:form>
+                    <nav class="main-navigation">
+                        <button type="button" class="toggle-menu"><i class="fa fa-bars"></i></button>                        
+                        <ul class="menu">
+                          <li class="menu-item "> <a href="/MuzikLand/index.xhtml">Home</a> </li>
+                          <li class="menu-item"> <h:commandLink value="Logout" action="/login.xhtml?faces-redirect=true"/> </li>
+                          <li class="menu-item ">  <h:commandLink  value="Edit" action="#{navigationControllers.pageA('sarkilar')}" rendered="#{uyelikYapanlarControllers.updateToKullanici.yetki.uye_Yetki == 1}" /> </li>
+                          <li class="menu-item current-menu-item"> <h:commandLink  value="Sarkilar" action="#{navigationControllers.pageK('sarkilar')}"/> </li>
+                          <li class="menu-item ">  <h:commandLink  value="Listem" action="#{navigationControllers.pageK('listem')}"/> </li>
+                          <li class="menu-item ">  <h:commandLink value="Profilim" action="#{navigationControllers.pageK('profilim')}"/> </li>
+                          <li class="menu-item ">
+                               <div style="padding-right: 50px">
+                           <h:outputText value="#{uyelikYapanlarControllers.tmpUser}" style="color: white;margin-right: 10px;font-style: italic;font-size: 25px"/> 
+                           <h:graphicImage value="/file/#{uyelikYapanlarControllers.updateToKullanici.yetki.resim.fileName}" width="70px" height="55px" style="border-radius: 30px" /> 
+                               </div>
+                           </li>
+                        </ul> <!-- .menu -->                        
+                    </nav> <!-- .main-navigation -->
+                    </h:form>
+                    <div class="mobile-menu"></div>
+                </div>
+            </header> <!-- .site-header -->
+        </div>
+</ui:composition>
+

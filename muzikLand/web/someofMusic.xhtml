@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1"></meta>
+
+        <title>Music Land</title>
+         <link href="/MuzikLand/resources/css/bootstrap.css" rel="stylesheet"></link>
+        <!-- Loading third party fonts -->       
+        <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet" type="text/css"></link>
+        <link href="/MuzikLand/resources/fonts/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
+        <!-- Loading main css file -->
+        <link rel="stylesheet" href="/MuzikLand/resources/style.css"></link>
+        
+        <script src="/MuzikLand/resources/js/jquery-1.11.1.min.js"></script>		
+        <script src="/MuzikLand/resources/js/plugins.js"></script>
+        <script src="/MuzikLand/resources/js/app.js"></script>
+        <script src="/MuzikLand/resources/js/jquery-3.3.1.min.js"></script>
+        <script src="/MuzikLand/resources/js/bootstrap.js"></script>
+    </h:head>
+    <body class="header-collapse">
+
+        <div id="site-content">
+            <header class="site-header">
+                <div class="container">
+                    <a href="/MuzikLand/index.xhtml" id="branding">
+                        <img src="/MuzikLand/resources/images/logo.png" alt="Site Title" width="150px" height="50px"></img>
+                        <small class="site-description">Music is lifestyle</small>
+                    </a> <!-- #branding -->
+                    <h:form id="nav">
+                        <nav class="main-navigation">                                          
+                            <button type="button" class="toggle-menu"><i class="fa fa-bars"></i></button>                                             
+                            <ul class="menu">                                                    
+                                <li class="menu-item current-menu-item"><a href="/MuzikLand/index.xhtml">Home</a></li>
+                                <li class="menu-item"> <h:commandLink value="Login/Sign" action="/login.xhtml?faces-redirect=true" rendered="#{sessionScope.valid_admin.kullanici_id== null and sessionScope.valid_user.kullanici_id== null}"/> </li>
+                                <li class="menu-item"> <h:commandLink value="Logout" action="/login.xhtml?faces-redirect=true" rendered="#{sessionScope.valid_admin.kullanici_id!= null or sessionScope.valid_user.kullanici_id!= null}"/> </li>
+                                <li class="menu-item"><a href="/MuzikLand/about.xhtml">About</a></li>
+                                <li class="menu-item"> <h:commandLink value="My Page" action="/site/kullanici/sarkilar/sarkilar.xhtml?faces-redirect=true" rendered="#{sessionScope.valid_admin.kullanici_id!= null or sessionScope.valid_user.kullanici_id!= null}"/> </li>                                
+                                <li class="menu-item">
+                                    <div>
+                                        <h:outputLabel value="#{uyelikYapanlarControllers.tmpUser}" rendered="#{sessionScope.valid_admin.kullanici_id!= null or sessionScope.valid_user.kullanici_id!= null}" style="color: white;margin-right: 10px;font-style: italic;font-size: 25px"/>
+                                        <h:graphicImage value="/file/#{uyelikYapanlarControllers.updateToKullanici.yetki.resim.fileName}" rendered="#{sessionScope.valid_admin.kullanici_id!= null or sessionScope.valid_user.kullanici_id!= null}" width="70px" height="55px" style="border-radius: 30px" title="#{uyelikYapanlarControllers.tmpUser}">                                                                
+                                        </h:graphicImage>    
+                                    </div>
+                                </li> 
+                            </ul> <!-- .menu -->
+                        </nav> <!-- .main-navigation -->
+                    </h:form>
+                    <div class="mobile-menu"></div>
+                </div>
+            </header> <!-- .site-header -->
+
+            <div class="hero">
+                <div class="slider">
+                    <ul class="slides">
+                        <li class="lazy-bg" data-background="/MuzikLand/resources/images/slide-1.jpg"> 
+                            <div class="container">
+                            <div class="row">
+                            <div class="col-md-8"> 
+                                <h:form style="margin-top: -50px">
+                                    <ui:include src="/site/kullanici/sarkilar/kpagination.xhtml"/>
+                                </h:form>
+                                <h:form style="margin-top: 30px">
+                                    <h:outputLabel value="Sarkilar" style="font-size: 50px;font-style: italic;margin-right: 170px;color: white"/>
+                                    <h:dataTable value="#{sarkiControllers.slist}" var="sarki">     
+                                        <h:column>
+                                            <h:outputLabel value="-------------------------******************------------------------" style="color: white;margin-left: 100px"/>                                                                                    
+                                                <div style="width: 240px;margin-left: 100px;margin-top: 10px">                                                   
+                                                    <div>
+                                                        <h:commandLink value="#{sarki.tmp_name}" action="#{extraControllers.sarkiOzeti(sarki)}" style="margin-left: 100px;font-size: 30px">                            
+                                                            </h:commandLink>
+                                                    </div>
+                                                    <h:panelGroup layout="block" rendered="#{sarki.sarkiDoc.fileType.contains('video') and sarkiDocmentControllers.size(sarki.sarkiDoc)}" style="margin-bottom: 10px" >                                                       
+                                                        <video witdh="240" height="240" controls="vid">   
+                                                            <source src="/MuzikLand/file/#{sarki.sarkiDoc.fileName}" type="video/mp4"/>                                                    
+                                                        </video>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup layout="block" rendered="#{sarki.sarkiDoc.fileType.contains('audio') and sarkiDocmentControllers.size(sarki.sarkiDoc)}" style="margin-bottom: 10px" >                                                        
+                                                        <audio witdh="100" height="100" controls="aud">   
+                                                            <source src="/MuzikLand/file/#{sarki.sarkiDoc.fileName}" type="audio/mp3"/>                                                    
+                                                        </audio>
+                                                    </h:panelGroup>
+                                                </div>
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:form>
+                            </div>
+                                <div class="col-md-4" style="margin-left: -150px">
+                                <ui:include src="/site/kullanici/sarkilar/kform.xhtml"/>
+                                </div>
+                            </div>
+                        </div>
+                        </li>
+                    </ul>                    
+                </div>
+            </div>
+        </div> <!-- #site-content -->
+    </body>
+
+</html>

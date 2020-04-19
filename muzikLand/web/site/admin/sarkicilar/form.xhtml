@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form id="sarkici-form">
+        
+        <div class="form-group" style="margin-top: 30px">
+            <h:commandButton value="Update" rendered="#{sarkiciControllers.sarkici.sarkici_id!=null}" action="#{sarkiciControllers.update()}" styleClass="btn btn-primary">
+                <f:ajax execute="sarkici-form" render="sil-resim kullanici_resim sarkici-table sarkici-form"/>
+            </h:commandButton>
+            <h:commandButton value="clear Form" rendered="#{sarkiciControllers.sarkici.sarkici_id!=null}" action="#{sarkiciControllers.clearForm()}" style="margin-left: 10px" styleClass="btn btn-sm btn-info">
+                <f:ajax execute="sarkici-form" render="sil-resim kullanici_resim sarkici-form"/>
+            </h:commandButton>
+            <h:commandButton value="create" rendered="#{sarkiciControllers.sarkici.sarkici_id == null}" action="#{sarkiciControllers.create()}" styleClass="btn btn-primary" >
+                <f:ajax execute="sarkici-form" render="sarkici-table sarkici-form"/>
+            </h:commandButton>      
+        </div>
+        
+        <div class="form-group">
+            <h:outputLabel  rendered="#{sarkiciControllers.sarkici.sarkici_id!=null}">
+                <b> Update Yapacağiniz Sarkici Id : </b>
+            </h:outputLabel>
+            <h:outputText value="#{sarkiciControllers.sarkici.sarkici_id}" rendered="#{sarkiciControllers.sarkici.sarkici_id!=null}"/>
+            <br/>
+            <h:outputLabel value="Sarkici name"/> 
+            <h:inputText id="isim" class="form-control"  value="#{sarkiciControllers.sarkici.name}" />
+            <h:message for="isim"/><br/>
+            <h:outputLabel value="Sarkici Surname"/> 
+            <h:inputText id="soyisim" class="form-control"  value="#{sarkiciControllers.sarkici.last_name}" />                            
+            <h:message for="soyisim"/><br/>
+            <h:outputLabel value="Sarkici Yasi"/> 
+            <h:inputText class="form-control"  value="#{sarkiciControllers.sarkici.yas}"/>
+
+            <Label for="category"> Album </Label>
+            <h:selectManyListbox  styleClass="custom-select" id="category" value="#{sarkiciControllers.sarkici.sarkiciAlbum}" converter="albumConverter" size="4">
+                <f:selectItems value="#{sarkiciControllers.albumKontrol.allAlbumList()}" var="album" itemValue="#{album}" itemLabel="#{album.name}"/>                                
+            </h:selectManyListbox>
+
+            <Label for="secilen-Ulke"> Ulke </Label>
+            <h:selectOneMenu styleClass="custom-select" id="secilen-ulke" value="#{sarkiciControllers.sarkici.ulke}" converter="ulkeConverter">
+                <f:selectItems value="#{sarkiciControllers.ulkeList.allUlke()}" var="ulke" itemValue="#{ulke}" itemLabel="#{ulke.ulke}"/>                                
+            </h:selectOneMenu> 
+
+        </div>
+        <div style="padding-bottom: 500px"></div>
+    </h:form>
+
+</ui:composition>
